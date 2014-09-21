@@ -8,10 +8,20 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
 
+    
+    @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var enterNameTextField: UITextField!
+    @IBOutlet weak var enterMessageTextField: UITextField!
+    @IBOutlet weak var mailButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.enterNameTextField.delegate    = self
+        self.enterMessageTextField.delegate = self
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -21,5 +31,36 @@ class ViewController: UIViewController {
     }
 
 
+
+    func textFieldShouldReturn(textField: UITextField!) -> Bool {
+        
+        textField.resignFirstResponder()
+        
+        return true
+    }
+    
+    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+        
+        self.view.endEditing(true)
+        
+    }
+    
+    @IBAction func sendMailButtonPressed(sender: UIButton) {
+        
+        // Assigns text value of enterMessage text field to the messageLabel and resets enterMessage text field to blank.
+        self.messageLabel.text = self.enterMessageTextField.text
+        self.enterMessageTextField.text = ""
+        self.messageLabel.textColor = UIColor.blueColor()
+        
+        self.messageLabel.hidden = false
+        
+        // Dismisses keyboard for both text fields when sendMailButton is pressed.
+        self.enterNameTextField.resignFirstResponder()
+        self.enterMessageTextField.resignFirstResponder()
+        
+        mailButton.setTitle("Mail Sent", forState: UIControlState.Normal)
+        
+    }
+    
 }
 
