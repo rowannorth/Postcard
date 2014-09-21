@@ -51,8 +51,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.messageLabel.text = self.enterMessageTextField.text
         self.enterMessageTextField.text = ""
         self.messageLabel.textColor = UIColor.blueColor()
-        
         self.messageLabel.hidden = false
+        
+        self.nameLabel.text = self.enterNameTextField.text
+        self.enterNameTextField.text = ""
+        self.nameLabel.textColor = UIColor.blueColor()
+        self.nameLabel.hidden = false
         
         // Dismisses keyboard for both text fields when sendMailButton is pressed.
         self.enterNameTextField.resignFirstResponder()
